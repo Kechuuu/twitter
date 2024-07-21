@@ -1,15 +1,29 @@
-import './App.css'
-import { TwitterFollowCard } from './twitterFollowCard'
+import { useState } from "react";
+import "./App.css";
+import { TwitterFollowCard } from "./twitterFollowCard";
 
-export function App(){
-    const formatUserName = (userName) => {`@${userName}`}
-    
-    return (
-    <section className='App'>
-    <TwitterFollowCard formatUserName={formatUserName} userName="Jesus" name="Jesus" isFollowing={true} />
-    <TwitterFollowCard formatUserName={formatUserName} userName="jose" name="Jose" isFollowing={false} />
-    <TwitterFollowCard formatUserName={formatUserName} userName="michel" name="Michel" isFollowing={true} />
-    <TwitterFollowCard formatUserName={formatUserName} userName="rosa" name="Rosa" isFollowing={false} />
+const users = [
+  { name: "Jesus", userName: "jesus", isFollowing: false },
+  { name: "Jose", userName: "jose", isFollowing: false },
+  { name: "Michel", userName: "michel", isFollowing: true },
+  { name: "Rosa", userName: "rosa", isFollowing: true },
+];
+
+export function App() {
+  return (
+    <section className="App">
+      {users.map((user) => {
+        const { name, userName, isFollowing } = user;
+        return (
+          <TwitterFollowCard
+        key={userName}
+          name={name}
+            userName={userName}
+            initialIsFollowing={isFollowing}
+          >
+          </TwitterFollowCard>
+        );
+      })}
     </section>
-    ) 
+  );
 }
